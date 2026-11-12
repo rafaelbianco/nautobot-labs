@@ -29,5 +29,3 @@ class PingViaGit(Job):
         else:
             self.logger.failure(f"Falha!\n{res.stderr or res.stdout}")
             return "Falha"
-
-register_jobs(PingViaGit)
