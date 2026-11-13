@@ -7,7 +7,7 @@ from ..lego.core import GRUPO_PECAS, Peca
 
 # O endereço do webhook é um segredo: fica numa variável de ambiente do container, nunca no código.
 VARIAVEL_WEBHOOK = "GOOGLE_CHAT_WEBHOOK_URL"
-
+# teste
 
 class ResumoGoogleChat(Peca):
     """Envia para o Google Chat um resumo dos itens recebidos. Devolve os itens sem alterar."""
