@@ -21,6 +21,7 @@ class SelecionarDevices(PecaInicial):
             saida.append(
                 {
                     "nome": device.name,
+                    "device_id": str(device.pk),
                     "ip": ip,
                     "ok": ip is not None,
                     "mensagem": "" if ip else "Sem IP primário cadastrado",
