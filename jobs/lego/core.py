@@ -9,6 +9,7 @@ Um item é um dicionário simples, uma "linha" de informação. Chaves padrão:
     ip        -> endereço IP, se houver
     ok        -> True/False: este item está bem até agora?
     mensagem  -> texto curto explicando o que aconteceu
+    detalhes  -> (opcional) lista de textos curtos; o resumo no Google Chat mostra uma por linha
 
 Qualquer outra chave é livre (ex.: "vlan_id", "latencia_ms"). Só use texto,
 números, True/False, listas e dicionários (nada de objetos do Nautobot).

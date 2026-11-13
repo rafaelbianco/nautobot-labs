@@ -34,6 +34,7 @@ class ResumoGoogleChat(Peca):
             ip = f" ({item['ip']})" if item.get("ip") else ""
             mensagem = f" - {item['mensagem']}" if item.get("mensagem") else ""
             linhas.append(f"{icone} {item.get('nome', '?')}{ip}{mensagem}")
+            linhas.extend(f"      • {detalhe}" for detalhe in item.get("detalhes", []))
         texto = "\n".join(linhas)
 
         if somente_mostrar:
