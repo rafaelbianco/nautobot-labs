@@ -1,5 +1,6 @@
 import ipaddress
 import re
+import shutil
 import subprocess
 
 from nautobot.apps.jobs import IntegerVar, register_jobs
@@ -19,6 +20,11 @@ class PingItens(Peca):
     timeout = IntegerVar(label="Timeout por ping (s)", default=2, min_value=1, max_value=10)
 
     def processar(self, itens, quantidade=2, timeout=2, **_):
+        if itens and shutil.which("ping") is None:
+            raise RuntimeError(
+                "O comando 'ping' não existe neste container. "
+                "Use a imagem do worker com iputils-ping (Dockerfile.worker)."
+            )
         for item in itens:
             try:
                 # Garante que é mesmo um IP, já que o item pode vir de qualquer execução anterior.

@@ -43,8 +43,16 @@ class ResumoGoogleChat(Peca):
         url = os.environ.get(VARIAVEL_WEBHOOK)
         if not url:
             raise RuntimeError(f"A variável de ambiente {VARIAVEL_WEBHOOK} não está configurada no Nautobot.")
-        resposta = requests.post(url, json={"text": texto}, timeout=10)
-        resposta.raise_for_status()
+        # O Google Chat às vezes demora a responder; tenta duas vezes antes de desistir.
+        for tentativa in (1, 2):
+            try:
+                resposta = requests.post(url, json={"text": texto}, timeout=30)
+                resposta.raise_for_status()
+                break
+            except requests.exceptions.Timeout:
+                if tentativa == 2:
+                    raise
+                self.logger.warning("Google Chat não respondeu a tempo; tentando de novo.")
         self.logger.success("Resumo enviado ao Google Chat.")
         return itens
 
